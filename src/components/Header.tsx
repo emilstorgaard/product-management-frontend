@@ -15,7 +15,7 @@ export function Header() {
     <header className="mb-10">
 	<nav className="flex justify-between items-center py-4 px-6 bg-white text-gray-800 shadow-md">
 		<Link href="/" className="flex items-center space-x-3">
-			<Image src="/favicon.ico" width={500} height={500} alt="logo" className="h-8 w-auto" />
+			<Image src="/img/box.png" width={500} height={500} alt="logo" className="h-8 w-auto" />
 			<span className="text-lg font-semibold">Product Management</span>
 		</Link>
 
@@ -52,7 +52,7 @@ export function Header() {
 		<div className="fixed inset-y-0 right-0 z-20 w-full max-w-xs overflow-y-auto bg-white shadow-lg px-6 py-6 sm:ring-1 sm:ring-gray-900/10">
 			<div className="flex items-center justify-between">
 				<Link href="/" className="-m-1.5 p-1.5">
-					<Image className="h-8 w-auto" src="/favicon.ico" width={500} height={500} alt="" />
+					<Image className="h-8 w-auto" src="/img/box.png" width={500} height={500} alt="" />
 				</Link>
 				<button type="button" className="-m-2.5 rounded-md p-2.5 text-gray-700" onClick={toggleMenu}>
 					<svg
