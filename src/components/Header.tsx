@@ -71,8 +71,8 @@ export function Header() {
 			</div>
 			<div className="mt-6">
 				<div className="space-y-4">
-					<Link href="/products" className="block py-2 px-4 text-center text-sm text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition duration-200">Products</Link>
-					<Link href="/products/create" className="block py-2 px-4 text-center text-sm text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition duration-200">Create Product</Link>
+					<Link href="/products" onClick={toggleMenu} className="block py-2 px-4 text-center text-sm text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition duration-200">Products</Link>
+					<Link href="/products/create" onClick={toggleMenu} className="block py-2 px-4 text-center text-sm text-gray-700 bg-gray-100 rounded hover:bg-gray-200 transition duration-200">Create Product</Link>
 				</div>
 			</div>
 		</div>

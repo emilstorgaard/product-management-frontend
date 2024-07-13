@@ -2,7 +2,7 @@ export default function CreateProduct() {
     return (
       
 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
-	<div className="w-full bg-white rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+	<div className="w-full bg-white border border-gray-200 rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
 		<div className="p-6 space-y-4 md:space-y-6 sm:p-8">
 			<h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
 				Create Product
@@ -21,8 +21,7 @@ export default function CreateProduct() {
 				</div>
 				<div>
 					<label className="block mb-2 text-sm font-medium text-gray-900">Description</label>
-					<input
-						type="text"
+					<textarea
 						name="description"
 						id="description"
 						placeholder="This is a good product"
