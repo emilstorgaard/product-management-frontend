@@ -21,22 +21,22 @@ export function Products() {
         >
           {isGridView ? (
             <Image
-              src="/img/grid.png"
-              alt="Grid View"
-              width={24}
-              height={24}
-              className="mr-2"
-            />
-          ) : (
-            <Image
               src="/img/list.png"
               alt="List View"
               width={24}
               height={24}
               className="mr-2"
             />
+          ) : (
+            <Image
+              src="/img/grid.png"
+              alt="Grid View"
+              width={24}
+              height={24}
+              className="mr-2"
+            />
           )}
-          {isGridView ? "Grid View" : "List View"}
+          {isGridView ? "List View" : "Grid View"}
         </button>
       </div>
 

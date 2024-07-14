@@ -9,28 +9,29 @@ interface ProductProps {
 
 const Product: React.FC<ProductProps> = ({ id, name, description }) => {
   return (
-    <li className="py-4">
+    <li className="p-4 rounded hover:bg-gray-100 hover:cursor-pointer transition-shadow duration-300 ease-in-out">
+      <Link href={`/products/${id}`}>
       <div className="flex items-center space-x-4 rtl:space-x-reverse">
-        <div className="flex-shrink-0">
-          <Image
-            className="w-16 h-16 rounded"
-            src="/img/150.png"
-            width={500}
-            height={500}
-            alt={`${name}`}
-          />
-        </div>
-        <div className="flex-1 min-w-0">
-          <p className="text-lg font-medium text-gray-900 truncate">
-            {name} {id}
-          </p>
-          <p className="text-sm text-gray-500 truncate">
-            {description}
-          </p>
-        </div>
+          <div className="flex-shrink-0">
+            <Image
+              className="w-16 h-16 rounded"
+              src="/img/150.png"
+              width={500}
+              height={500}
+              alt={`${name}`}
+            />
+          </div>
+          <div className="flex-1 min-w-0">
+            <p className="text-lg font-medium text-gray-900 truncate">
+              {name} {id}
+            </p>
+            <p className="text-sm text-gray-500 truncate">
+              {description}
+            </p>
+          </div>
         <div className="inline-flex items-center space-x-6">
           <Link
-            href={`/posts/${id}/edit`}
+            href={`/products/${id}/edit`}
             className="text-blue-500 hover:text-blue-700 font-bold rounded-md transition duration-300 ease-in-out"
           >
             Edit
@@ -43,6 +44,7 @@ const Product: React.FC<ProductProps> = ({ id, name, description }) => {
           </button>
         </div>
       </div>
+      </Link>
     </li>
   );
 };
