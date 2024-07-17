@@ -3,8 +3,7 @@
 import Products from "@/components/Products";
 import Pagination from "@/components/Pagination";
 import { useSearchParams } from 'next/navigation';
-import { Suspense } from 'react';
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Suspense } from "react";
 import { getProducts } from "@/lib/products";
 import { Spinner } from "@/components/Spinner";
 
@@ -45,7 +44,7 @@ export default function Product() {
     }, [page]);
 
     return (
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Spinner />}>
             <div className="container mx-auto">
                 {loading && (
                     <div className="flex justify-center">
@@ -68,4 +67,4 @@ export default function Product() {
             </div>
         </Suspense>
     );
-  }
+}
