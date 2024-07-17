@@ -14,7 +14,7 @@ type Product = {
     createdAt: string;
 };
 
-export default function Product() {
+function Product() {
     const searchParams = useSearchParams()
     const page = searchParams.get('page');
 
@@ -67,4 +67,12 @@ export default function Product() {
             </div>
         </Suspense>
     );
+}
+
+export default function ProductPage() {
+    return (
+        <Suspense fallback={<Spinner />}>
+            <Product />
+        </Suspense>
+    )
 }
