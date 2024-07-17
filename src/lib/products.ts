@@ -1,3 +1,7 @@
+'use server'
+
+import { redirect } from 'next/navigation'
+
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export async function getProducts(page: string) {
@@ -31,6 +35,8 @@ export async function putProduct(id: string, name: string, description: string) 
     if (!res.ok) {
         throw new Error("Failed to edit product");
     }
+
+    redirect(`/products/${id}`)
 }
 
 export async function postProduct(name: string, description: string) {
@@ -48,6 +54,8 @@ export async function postProduct(name: string, description: string) {
     if (!res.ok) {
         throw new Error("Failed to create product");
     }
+
+    redirect(`/products?page=1`)
 }
 
 export async function deleteProduct(id: string) {

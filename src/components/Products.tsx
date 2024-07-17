@@ -13,10 +13,11 @@ type Product = {
 };
 
 interface PageProps {
-    products: Product[]
+    products: Product[];
+    onDelete: () => void;
 }
 
-const Products: React.FC<PageProps> = ({ products }) => {
+const Products: React.FC<PageProps> = ({ products, onDelete }) => {
     const [isGridView, setIsGridView] = useState(true);
 
     const toggleView = () => {
@@ -24,7 +25,7 @@ const Products: React.FC<PageProps> = ({ products }) => {
     };
 
     return (
-        <div className="container mx-auto px-4 py-8">
+        <div className="container mx-auto px-4 pb-8">
             <div className="flex justify-end mb-4">
                 <button onClick={toggleView} className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     {isGridView ? (
@@ -57,6 +58,7 @@ const Products: React.FC<PageProps> = ({ products }) => {
                             id={product.id}
                             name={product.name}
                             description={product.description}
+                            onDelete={onDelete}
                         />
                     ))}
                 </div>

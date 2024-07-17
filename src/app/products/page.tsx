@@ -43,29 +43,46 @@ function Product() {
         fetchProducts();
     }, [page]);
 
+
+    const reloadProducts = () => {
+        // You can force a refetch of products here
+        async function fetchProducts() {
+            try {
+                const initialProducts = await getProducts(page || "1");
+                setProducts(initialProducts.products);
+                setCurrentPage(initialProducts.currentPage);
+                setTotalPages(initialProducts.totalPages);
+                setTotalProducts(initialProducts.totalProducts);
+            } catch (err) {
+                setError("Failed to fetch products");
+            } finally {
+                setLoading(false);
+            }
+        }
+        fetchProducts();
+    };
+
     return (
-        <Suspense fallback={<Spinner />}>
-            <div className="container mx-auto">
-                {loading && (
-                    <div className="flex justify-center">
-                        <Spinner />
-                    </div>
-                )}
+        <div className="container mx-auto">
+            {loading && (
+                <div className="flex justify-center">
+                    <Spinner />
+                </div>
+            )}
 
-                {error && 
-                    <div className="flex justify-center">
-                        <div className="text-red-500 mt-2">{error}</div>
-                    </div>
-                }
+            {error && 
+                <div className="flex justify-center">
+                    <div className="text-red-500 mt-2">{error}</div>
+                </div>
+            }
 
-                {!loading && !error && (
-                    <>
-                        <Products products={products}/>
-                        <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} />
-                    </>
-                )}
-            </div>
-        </Suspense>
+            {!loading && !error && (
+                <>
+                    <Products products={products} onDelete={reloadProducts} />
+                    <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} />
+                </>
+            )}
+        </div>
     );
 }
 

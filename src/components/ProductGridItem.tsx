@@ -7,17 +7,21 @@ interface ProductProps {
     id: string;
     name: string;
     description: string;
+    onDelete: () => void;
 }
 
-const Product: React.FC<ProductProps> = ({ id, name, description }) => {
+const Product: React.FC<ProductProps> = ({ id, name, description, onDelete }) => {
     const [isDeleting, setIsDeleting] = useState(false);
 
     const handleDelete = async () => {
         setIsDeleting(true)
         try {
-            deleteProduct(id)
+            await deleteProduct(id)
+            onDelete(); // Trigger the callback to rerender products
         } catch (error) {
             console.error('Error deleting product:', error);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
