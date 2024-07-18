@@ -17,6 +17,7 @@ type Product = {
 function Product() {
     const searchParams = useSearchParams()
     const page = searchParams.get('page');
+    const sort = searchParams.get('sort');
 
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
@@ -30,7 +31,7 @@ function Product() {
         async function fetchProducts() {
             setLoading(true);
             try {
-                const initialProducts = await getProducts(page || "1", 'A-Z');
+                const initialProducts = await getProducts(page || "1", sort || "");
                 setProducts(initialProducts.products);
                 setCurrentPage(initialProducts.currentPage);
                 setTotalPages(initialProducts.totalPages);
@@ -42,14 +43,13 @@ function Product() {
             }
         }
         fetchProducts();
-    }, [page]);
-
+    }, [page, sort]);
 
     const reloadProducts = () => {
         async function fetchProducts() {
             setLoading(true);
             try {
-                const initialProducts = await getProducts(page || "1", 'A-Z');
+                const initialProducts = await getProducts(page || "1", sort || "");
                 setProducts(initialProducts.products);
                 setCurrentPage(initialProducts.currentPage);
                 setTotalPages(initialProducts.totalPages);
@@ -80,8 +80,8 @@ function Product() {
 
             {!loading && !error && (
                 <>
-                    <Products products={products} onDelete={reloadProducts} />
-                    <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} sort={'A-Z'} />
+                    <Products products={products} page={page} sort={sort} onDelete={reloadProducts} />
+                    <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} sort={sort} />
                 </>
             )}
         </div>
