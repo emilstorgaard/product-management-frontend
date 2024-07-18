@@ -27,6 +27,12 @@ function Product() {
     const [totalPages, setTotalPages] = useState("");
     const [totalProducts, setTotalProducts] = useState("");
 
+    const [isGridView, setIsGridView] = useState(true);
+
+    const handleView = () => {
+        setIsGridView(!isGridView);
+    };
+
     useEffect(() => {
         async function fetchProducts() {
             setLoading(true);
@@ -65,7 +71,7 @@ function Product() {
 
     return (
         <div className="container mx-auto">
-
+            
             {loading && (
                 <div className="flex justify-center">
                     <Spinner />
@@ -80,7 +86,7 @@ function Product() {
 
             {!loading && !error && (
                 <>
-                    <Products products={products} page={page} sort={sort} onDelete={reloadProducts} />
+                    <Products products={products} page={page} sort={sort} isGridView={isGridView} onDelete={reloadProducts} handleView={handleView} />
                     <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} sort={sort} />
                 </>
             )}

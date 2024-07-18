@@ -5,6 +5,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { getProduct } from "@/lib/products";
 import { Spinner } from "@/components/Spinner";
+import { getDateTime } from "@/lib/dateTime";
 
 type Product = {
     id: string;
@@ -73,7 +74,7 @@ export default function Product({ params }: { params: { id: string } }) {
                             </div>
                             <div>
                                 <label className="block mb-2 text-sm font-bold text-gray-900">Created At</label>
-                                <label className="block mb-2 text-sm font-medium text-gray-900">{product?.createdAt}</label>
+                                <label className="block mb-2 text-sm font-medium text-gray-900">{getDateTime(product?.createdAt)}</label>
                             </div>
                             <div className="flex justify-between items-center">
                                 <Link href={`/products/${params.id}/edit`} className="text-blue-500 hover:text-blue-700 font-bold rounded-md transition duration-300 ease-in-out">

@@ -17,17 +17,14 @@ interface PageProps {
     products: Product[];
     page: string | null;
     sort: string | null;
+    isGridView: boolean;
     onDelete: () => void;
+    handleView: () => void;
 }
 
-const Products: React.FC<PageProps> = ({ products, page, sort, onDelete }) => {
-    const [isGridView, setIsGridView] = useState(true);
+const Products: React.FC<PageProps> = ({ products, page, sort, isGridView, onDelete, handleView }) => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const toggleView = () => {
-        setIsGridView(!isGridView);
-    };
-  
     return (
         <div className="container mx-auto px-4 pb-8">
             <div className="flex justify-between mb-4">
@@ -57,7 +54,7 @@ const Products: React.FC<PageProps> = ({ products, page, sort, onDelete }) => {
                     </div>
                 </div>
 
-                <button onClick={toggleView} className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                <button onClick={handleView} className="inline-flex items-center px-3 py-1 border border-gray-300 rounded-md bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                     {isGridView ? (
                         <Image
                             src="/img/list.png"
