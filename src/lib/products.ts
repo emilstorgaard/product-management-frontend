@@ -4,8 +4,8 @@ import { redirect } from 'next/navigation'
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-export async function getProducts(page: string) {
-    const res = await fetch(`${apiUrl}/Products?page=${page}`, {
+export async function getProducts(page: string, sort: string) {
+    const res = await fetch(`${apiUrl}/Products?page=${page}&sort=${sort}`, {
         cache: "no-store",
     });
     const data = await res.json();

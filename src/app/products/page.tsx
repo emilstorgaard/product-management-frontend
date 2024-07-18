@@ -28,8 +28,9 @@ function Product() {
 
     useEffect(() => {
         async function fetchProducts() {
+            setLoading(true);
             try {
-                const initialProducts = await getProducts(page || "1");
+                const initialProducts = await getProducts(page || "1", 'A-Z');
                 setProducts(initialProducts.products);
                 setCurrentPage(initialProducts.currentPage);
                 setTotalPages(initialProducts.totalPages);
@@ -45,10 +46,10 @@ function Product() {
 
 
     const reloadProducts = () => {
-        // You can force a refetch of products here
         async function fetchProducts() {
+            setLoading(true);
             try {
-                const initialProducts = await getProducts(page || "1");
+                const initialProducts = await getProducts(page || "1", 'A-Z');
                 setProducts(initialProducts.products);
                 setCurrentPage(initialProducts.currentPage);
                 setTotalPages(initialProducts.totalPages);
@@ -64,6 +65,7 @@ function Product() {
 
     return (
         <div className="container mx-auto">
+
             {loading && (
                 <div className="flex justify-center">
                     <Spinner />
@@ -79,7 +81,7 @@ function Product() {
             {!loading && !error && (
                 <>
                     <Products products={products} onDelete={reloadProducts} />
-                    <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} />
+                    <Pagination currentPage={currentPage} totalPages={totalPages} totalProducts={totalProducts} sort={'A-Z'} />
                 </>
             )}
         </div>
