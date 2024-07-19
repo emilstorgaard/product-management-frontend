@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { postProduct } from "@/lib/products";
+import { useRouter } from 'next/navigation'
 
 export default function CreateProduct() {
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [error, setError] = useState<string | null>(null);
+    const router = useRouter()
 
 	const createProduct = async (e: React.FormEvent) => {
 		e.preventDefault();
@@ -14,6 +16,7 @@ export default function CreateProduct() {
 	
 		try {
 			postProduct(name, description)
+            router.push('/products?page=1')
 		} catch (err: any) {
 		  setError(err.message);
 		}

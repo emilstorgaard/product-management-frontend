@@ -11,6 +11,7 @@ type Product = {
     name: string;
     description: string;
     createdAt: string;
+    updatedAt: string;
 };
 
 interface PageProps {
@@ -97,6 +98,7 @@ const Products: React.FC<PageProps> = ({ products, page, sort, isGridView, onDel
                             id={product.id}
                             name={product.name}
                             description={product.description}
+                            onDelete={onDelete}
                         />
                     ))}
                 </ul>

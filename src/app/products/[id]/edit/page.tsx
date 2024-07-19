@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import { getProduct, putProduct } from "@/lib/products";
 import { Spinner } from "@/components/Spinner";
 import Image from "next/image";
+import { useRouter } from 'next/navigation'
 
 export default function EditProduct({ params }: { params: { id: string } }) {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter()
 
     useEffect(() => {
         async function fetchProduct() {
@@ -33,6 +35,7 @@ export default function EditProduct({ params }: { params: { id: string } }) {
 
         try {
             putProduct(params.id, name, description)
+            router.push(`/products/${params.id}`)
         } catch (err: any) {
             setError(err.message);
         } finally {

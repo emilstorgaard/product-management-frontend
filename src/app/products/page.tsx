@@ -12,6 +12,7 @@ type Product = {
     name: string;
     description: string;
     createdAt: string;
+    updatedAt: string;
 };
 
 function Product() {

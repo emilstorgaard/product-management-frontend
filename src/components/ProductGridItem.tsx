@@ -17,7 +17,7 @@ const Product: React.FC<ProductProps> = ({ id, name, description, onDelete }) =>
         setIsDeleting(true)
         try {
             await deleteProduct(id)
-            onDelete(); // Trigger the callback to rerender products
+            onDelete();
         } catch (error) {
             console.error('Error deleting product:', error);
         } finally {

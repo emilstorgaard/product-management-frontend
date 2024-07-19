@@ -6,18 +6,22 @@ import Image from "next/image";
 import { getProduct } from "@/lib/products";
 import { Spinner } from "@/components/Spinner";
 import { getDateTime } from "@/lib/dateTime";
+import { deleteProduct } from "@/lib/products";
+import { useRouter } from 'next/navigation'
 
 type Product = {
     id: string;
     name: string;
     description: string;
     createdAt: string;
+    updatedAt: string;
 };
 
 export default function Product({ params }: { params: { id: string } }) {
     const [product, setProduct] = useState<Product>();
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const router = useRouter()
 
     useEffect(() => {
         async function fetchProduct() {
@@ -32,6 +36,26 @@ export default function Product({ params }: { params: { id: string } }) {
         }
         fetchProduct();
     }, [params.id]);
+
+    const [isDeleting, setIsDeleting] = useState(false);
+
+    const handleDelete = async () => {
+        setIsDeleting(true)
+        try {
+            await deleteProduct(params.id)
+            router.push('/products?page=1')
+        } catch (error) {
+            console.error('Error deleting product:', error);
+        } finally {
+            setIsDeleting(false);
+        }
+    };
+
+    const confirmDelete = () => {
+        if (window.confirm('Are you sure you want to delete this product?')) {
+            handleDelete();
+        }
+    };
 
     return (
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0">
@@ -76,11 +100,21 @@ export default function Product({ params }: { params: { id: string } }) {
                                 <label className="block mb-2 text-sm font-bold text-gray-900">Created At</label>
                                 <label className="block mb-2 text-sm font-medium text-gray-900">{getDateTime(product?.createdAt)}</label>
                             </div>
+                            <div>
+                                <label className="block mb-2 text-sm font-bold text-gray-900">Updated At</label>
+                                <label className="block mb-2 text-sm font-medium text-gray-900">{getDateTime(product?.updatedAt)}</label>
+                            </div>
                             <div className="flex justify-between items-center">
                                 <Link href={`/products/${params.id}/edit`} className="text-blue-500 hover:text-blue-700 font-bold rounded-md transition duration-300 ease-in-out">
                                     Edit
                                 </Link>
-                                <button type="button" className="text-red-500 hover:text-red-700 font-bold rounded-md transition duration-300 ease-in-out">Delete</button>
+                                {isDeleting ? (
+                                    <p className="text-red-500 font-bold">Deleting...</p>
+                                ) : (
+                                    <button onClick={confirmDelete} className="text-red-500 hover:text-red-700 font-bold rounded-md transition duration-300 ease-in-out">
+                                        Delete
+                                    </button>
+                                )}
                             </div>
                         </>
                     )}
